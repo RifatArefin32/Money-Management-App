@@ -44,7 +44,7 @@ class Transaction(models.Model):
 class IncomeRecord(models.Model):
     transaction = models.OneToOneField(Transaction, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, limit_choices_to={'type': 'income'}, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, limit_choices_to={'type': Category.categoryType.INCOME}, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Income {self.transaction.amount} to {self.account.name}"
@@ -54,7 +54,7 @@ class IncomeRecord(models.Model):
 class ExpenseRecord(models.Model):
     transaction = models.OneToOneField(Transaction, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, limit_choices_to={'type': 'expense'}, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, limit_choices_to={'type': Category.categoryType.EXPENSE}, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Expense {self.transaction.amount} from {self.account.name}"
