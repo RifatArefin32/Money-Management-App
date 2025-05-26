@@ -8,7 +8,9 @@ from .serializers import IncomeRecordSerializer
 # Show all income records
 @api_view(['GET'])
 def show_income_records(request):
-    records = IncomeRecord.objects.all().order_by('-transaction__created_at')
+    records = IncomeRecord.objects.select_related(
+        'transaction', 'account', 'category'
+    ).all().order_by('-transaction__created_at')
     serializer = IncomeRecordSerializer(records, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
