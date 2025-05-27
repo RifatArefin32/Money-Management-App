@@ -19,5 +19,5 @@ def show_income_records(request):
     except ObjectDoesNotExist:
         return error_response(message=message.DATA_NOT_FOUND, status_code=status.HTTP_404_NOT_FOUND)
     except Exception as e:
-        return error_response(error=e, message=message.GENERIC_ERROR)
+        return error_response(message=message.GENERIC_ERROR)
 
